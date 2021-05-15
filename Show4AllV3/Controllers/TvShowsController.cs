@@ -25,6 +25,7 @@ namespace Show4AllV3.Controllers
             return View(await _context.TvShow.ToListAsync());
         }
 
+
         // GET: TvShows/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -48,6 +49,13 @@ namespace Show4AllV3.Controllers
         {
             return View();
         }
+
+  
+        public async Task<IActionResult> TvShowInventory()
+        {
+            return View(await _context.TvShow.ToListAsync());
+        }
+
 
         // POST: TvShows/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
