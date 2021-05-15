@@ -5,15 +5,19 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
+using Show4AllV3.Models;
 
 namespace Show4AllV3.Views.TvShows
 {
     public class ShowSearchFormModel : PageModel
     {
+
+
         public void OnGet()
         {
         }
-   
+
 
     }
 }
