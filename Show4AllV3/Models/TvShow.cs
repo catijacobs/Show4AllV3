@@ -11,7 +11,7 @@ namespace Show4AllV3.Models
         public string Title { get; set; }
         public string Year { get; set; }
         public string Category { get; set; }
-
+        public string Image { get; set; }
         public TvShow()
         {
 

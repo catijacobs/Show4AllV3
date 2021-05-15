@@ -54,7 +54,7 @@ namespace Show4AllV3.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Title,Year,Category")] TvShow tvShow)
+        public async Task<IActionResult> Create([Bind("Id,Title,Year,Category, Image")] TvShow tvShow)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +86,7 @@ namespace Show4AllV3.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Year,Category")] TvShow tvShow)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Year,Category, Image")] TvShow tvShow)
         {
             if (id != tvShow.Id)
             {
