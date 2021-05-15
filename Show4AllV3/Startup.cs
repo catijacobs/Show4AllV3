@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Show4AllV3.Areas;
+using Show4AllV3.Areas.Data;
 using Show4AllV3.Data;
 using System;
 using System.Collections.Generic;
@@ -26,7 +27,6 @@ namespace Show4AllV3
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
         services.AddDbContext<ApplicationDbContext>(options =>
@@ -34,9 +34,6 @@ namespace Show4AllV3
         Configuration.GetConnectionString("DefaultConnection")));
         services.AddDatabaseDeveloperPageExceptionFilter();
 
-        //services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
-       //        .AddEntityFrameworkStores<ApplicationDbContext>();
-        services.AddControllersWithViews();
             services.AddAuthorization(options =>
             {
                 options.FallbackPolicy = new AuthorizationPolicyBuilder()
@@ -46,10 +43,7 @@ namespace Show4AllV3
 
         } 
 
-       
 
-
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
