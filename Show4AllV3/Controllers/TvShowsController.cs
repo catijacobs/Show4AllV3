@@ -9,6 +9,7 @@ using Show4AllV3.Data;
 using Show4AllV3.Models;
 
 
+
 namespace Show4AllV3.Controllers
 {
     public class TvShowsController : Controller
@@ -25,16 +26,7 @@ namespace Show4AllV3.Controllers
         {
             return View(await _context.TvShow.ToListAsync());
         }
-
-        public async Task<IActionResult> ShowSearchForm()
-        {
-            return View();
-        }
-
-        public async Task<IActionResult> ShowSearchResults(String SearchYear)
-        {
-            return View("Index", _context.TvShow.Where( j => j.Year.Contains(SearchYear)).ToListAsync());
-        }
+   
 
         // GET: TvShows/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -60,8 +52,12 @@ namespace Show4AllV3.Controllers
             return View();
         }
 
-  
         public async Task<IActionResult> TvShowInventory()
+        {
+            return View(await _context.TvShow.ToListAsync());
+        }
+
+        public async Task<IActionResult> ShowSearchForm()
         {
             return View(await _context.TvShow.ToListAsync());
         }
