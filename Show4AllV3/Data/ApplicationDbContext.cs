@@ -5,10 +5,11 @@ using System.Collections.Generic;
 using System.Text;
 using Show4AllV3.Models;
 using Microsoft.AspNetCore.Identity;
+using Show4AllV3.Areas.Data;
 
 namespace Show4AllV3.Data
 {
-    public class ApplicationDbContext : IdentityDbContext<IdentityUser>
+    public class ApplicationDbContext : IdentityDbContext<SampleAppUser>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
@@ -23,6 +24,7 @@ namespace Show4AllV3.Data
         }
 
         public DbSet<Show4AllV3.Models.TvShow> TvShow { get; set; }
+
     }
 
 
