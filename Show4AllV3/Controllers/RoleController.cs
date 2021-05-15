@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -7,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace Show4AllV3.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class RoleController : Controller
     {
         RoleManager<IdentityRole> roleManager;
@@ -19,11 +21,13 @@ namespace Show4AllV3.Controllers
             var roles = roleManager.Roles.ToList();
             return View(roles);
         }
+        [Authorize(Policy = "rolecreation")]
         public IActionResult Create()
         {
             return View(new IdentityRole());
         }
         [HttpPost]
+        [Authorize(Policy = "rolecreation")]
         public async Task<IActionResult> Create(IdentityRole role)
         {
             await roleManager.CreateAsync(role);
