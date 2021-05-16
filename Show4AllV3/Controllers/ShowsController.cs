@@ -51,16 +51,14 @@ namespace Show4AllV3.Controllers
         // GET: Shows/Create
         public IActionResult Create()
         {
-            ViewData["ActorListId"] = new SelectList(_context.Set<ActorList>(), "Id", "Id");
-            ViewData["EpisodeId"] = new SelectList(_context.Set<Episode>(), "Id", "Id");
-            ViewData["SeasonId"] = new SelectList(_context.Set<Season>(), "Id", "Id");
-            ViewData["GenreId"] = new SelectList(_context.Set<Genre>(), "Id", "Id");
+            ViewData["ActorListId"] = new SelectList(_context.Set<ActorList>(), "Name", "Name");
+            ViewData["EpisodeId"] = new SelectList(_context.Set<Episode>(), "Name", "Name");
+            ViewData["SeasonId"] = new SelectList(_context.Set<Season>(), "Name", "Name");
+            ViewData["GenreId"] = new SelectList(_context.Set<Genre>(), "Name", "Name");
             return View();
         }
 
-        // POST: Shows/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Title,Year,Image,Price,IsAvailable,ActorListId,SeasonId,EpisodeId,GenreId")] Shows shows)
@@ -91,16 +89,14 @@ namespace Show4AllV3.Controllers
             {
                 return NotFound();
             }
-            ViewData["ActorListId"] = new SelectList(_context.Set<ActorList>(), "Id", "Id", shows.ActorListId);
-            ViewData["EpisodeId"] = new SelectList(_context.Set<Episode>(), "Id", "Id", shows.EpisodeId);
-            ViewData["SeasonId"] = new SelectList(_context.Set<Season>(), "Id", "Id", shows.SeasonId);
-            ViewData["GenreId"] = new SelectList(_context.Set<Genre>(), "Id", "Id", shows.GenreId);
+            ViewData["ActorListId"] = new SelectList(_context.Set<ActorList>(), "Name", "Name", shows.ActorListId);
+            ViewData["EpisodeId"] = new SelectList(_context.Set<Episode>(), "Name", "Name", shows.EpisodeId);
+            ViewData["SeasonId"] = new SelectList(_context.Set<Season>(), "Name", "Name", shows.SeasonId);
+            ViewData["GenreId"] = new SelectList(_context.Set<Genre>(), "Name", "Name", shows.GenreId);
             return View(shows);
         }
 
-        // POST: Shows/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Year,Image,Price,IsAvailable,ActorListId,SeasonId,EpisodeId,GenreId")] Shows shows)
