@@ -24,5 +24,14 @@ namespace Show4AllV3.Repositories
 
             return starrating1;
         }
+
+        public async Task<StarRating1> AddAsync(StarRating1 rating)
+        {
+            _ctx.StarRating1.Add(rating);
+
+            await _ctx.SaveChangesAsync();
+
+            return rating;
+        }
     }
 }

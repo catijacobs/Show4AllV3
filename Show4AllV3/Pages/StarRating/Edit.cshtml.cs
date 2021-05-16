@@ -6,15 +6,16 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Show4AllV3.Data;
 using Show4AllV3.Models;
 
 namespace Show4AllV3.Pages.StarRating
 {
     public class EditModel : PageModel
     {
-        private readonly Show4AllV3Context _context;
+        private readonly ApplicationDbContext _context;
 
-        public EditModel(Show4AllV3Context context)
+        public EditModel(ApplicationDbContext context)
         {
             _context = context;
         }

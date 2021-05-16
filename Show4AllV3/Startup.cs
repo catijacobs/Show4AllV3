@@ -11,6 +11,7 @@ using Microsoft.Extensions.Hosting;
 using Show4AllV3.Areas;
 using Show4AllV3.Areas.Data;
 using Show4AllV3.Data;
+using Show4AllV3.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,6 +37,12 @@ namespace Show4AllV3
        Configuration.GetConnectionString("DefaultConnection")));
 
 
+         services.AddScoped<StarRatingRepository>();
+
+         //services.AddTransient<StarRatingRepository>();
+
+        //services.AddSingleton<StarRatingRepository>();
+
         services.AddDatabaseDeveloperPageExceptionFilter();
 
 
@@ -58,8 +65,7 @@ namespace Show4AllV3
 
              });
 
-            services.AddDbContext<Show4AllV3Context>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("Show4AllV3Context")));
+
 
 
 
