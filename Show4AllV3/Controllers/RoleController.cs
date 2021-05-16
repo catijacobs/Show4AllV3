@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Show4AllV3.Controllers
 {
-
+    [Authorize(Roles = "Admin")]
     public class RoleController : Controller
     {
         RoleManager<IdentityRole> roleManager;
