@@ -14,14 +14,16 @@ namespace Show4AllV3.Areas.Identity
 {
     public class IdentityHostingStartup : IHostingStartup
     {
-        public void Configure(IWebHostBuilder builder)
-        {
+       public void Configure(IWebHostBuilder builder)
+       {
             builder.ConfigureServices((context, services) =>
             {
-                services.AddDbContext<ApplicationDbContext>(options =>
-                    options.UseSqlServer(
-                        context.Configuration.GetConnectionString("DefaultConnection")));
-                services.AddIdentity<SampleAppUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
+              services.AddDbContext<ApplicationDbContext>(options =>
+                 options.UseSqlServer(
+                       context.Configuration.GetConnectionString("DefaultConnection")));
+
+
+               services.AddIdentity<SampleAppUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
                     .AddDefaultUI()
                     .AddEntityFrameworkStores<ApplicationDbContext>()
                     .AddDefaultTokenProviders();
