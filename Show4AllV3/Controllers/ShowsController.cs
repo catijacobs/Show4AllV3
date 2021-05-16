@@ -22,7 +22,7 @@ namespace Show4AllV3.Controllers
         // GET: Shows
         public async Task<IActionResult> Index()
         {
-            var show4AllV3Context = _context.Shows.Include(s => s.ActorList).Include(s => s.Episode).Include(s => s.Season);
+            var show4AllV3Context = _context.Shows.Include(s => s.ActorList).Include(s => s.Episode).Include(s => s.Season).Include(s => s.Genre);
             return View(await show4AllV3Context.ToListAsync());
         }
 
@@ -38,6 +38,7 @@ namespace Show4AllV3.Controllers
                 .Include(s => s.ActorList)
                 .Include(s => s.Episode)
                 .Include(s => s.Season)
+                .Include(s => s.Genre)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (shows == null)
             {
@@ -53,6 +54,7 @@ namespace Show4AllV3.Controllers
             ViewData["ActorListId"] = new SelectList(_context.Set<ActorList>(), "Id", "Id");
             ViewData["EpisodeId"] = new SelectList(_context.Set<Episode>(), "Id", "Id");
             ViewData["SeasonId"] = new SelectList(_context.Set<Season>(), "Id", "Id");
+            ViewData["GenreId"] = new SelectList(_context.Set<Genre>(), "Id", "Id");
             return View();
         }
 
@@ -72,6 +74,7 @@ namespace Show4AllV3.Controllers
             ViewData["ActorListId"] = new SelectList(_context.Set<ActorList>(), "Id", "Id", shows.ActorListId);
             ViewData["EpisodeId"] = new SelectList(_context.Set<Episode>(), "Id", "Id", shows.EpisodeId);
             ViewData["SeasonId"] = new SelectList(_context.Set<Season>(), "Id", "Id", shows.SeasonId);
+            ViewData["GenreId"] = new SelectList(_context.Set<Genre>(), "Id", "Id", shows.GenreId);
             return View(shows);
         }
 
@@ -91,6 +94,7 @@ namespace Show4AllV3.Controllers
             ViewData["ActorListId"] = new SelectList(_context.Set<ActorList>(), "Id", "Id", shows.ActorListId);
             ViewData["EpisodeId"] = new SelectList(_context.Set<Episode>(), "Id", "Id", shows.EpisodeId);
             ViewData["SeasonId"] = new SelectList(_context.Set<Season>(), "Id", "Id", shows.SeasonId);
+            ViewData["GenreId"] = new SelectList(_context.Set<Genre>(), "Id", "Id", shows.GenreId);
             return View(shows);
         }
 
@@ -99,7 +103,7 @@ namespace Show4AllV3.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Year,Image,Price,IsAvailable,ActorListId,SeasonId,EpisodeId,Rating")] Shows shows)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Year,Image,Price,IsAvailable,ActorListId,SeasonId,EpisodeId,GenreId,Rating")] Shows shows)
         {
             if (id != shows.Id)
             {
@@ -129,6 +133,7 @@ namespace Show4AllV3.Controllers
             ViewData["ActorListId"] = new SelectList(_context.Set<ActorList>(), "Id", "Id", shows.ActorListId);
             ViewData["EpisodeId"] = new SelectList(_context.Set<Episode>(), "Id", "Id", shows.EpisodeId);
             ViewData["SeasonId"] = new SelectList(_context.Set<Season>(), "Id", "Id", shows.SeasonId);
+            ViewData["GenreId"] = new SelectList(_context.Set<Genre>(), "Id", "Id", shows.GenreId);
             return View(shows);
         }
 
@@ -144,6 +149,7 @@ namespace Show4AllV3.Controllers
                 .Include(s => s.ActorList)
                 .Include(s => s.Episode)
                 .Include(s => s.Season)
+                .Include(s => s.Genre)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (shows == null)
             {

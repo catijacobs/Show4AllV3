@@ -36,6 +36,12 @@ namespace Show4AllV3.Models
         [ForeignKey("EpisodeId")]
         public virtual Episode Episode { get; set; }
 
+        [Display(Name = "Genre")]
+        [Required]
+        public int GenreId { get; set; }
+        [ForeignKey("GenreId")]
+        public virtual Genre Genre { get; set; }
+
         [RegularExpression(@"^[A-Z]+[a-zA-Z''-'\s]*$")]
         [StringLength(5)]
         public string Rating { get; set; }
