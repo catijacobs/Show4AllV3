@@ -5,15 +5,16 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Show4AllV3.Data;
 using Show4AllV3.Models;
 
 namespace Show4AllV3.Controllers
 {
     public class ShowsController : Controller
     {
-        private readonly Show4AllV3Context _context;
+        private readonly ApplicationDbContext _context;
 
-        public ShowsController(Show4AllV3Context context)
+        public ShowsController(ApplicationDbContext context)
         {
             _context = context;
         }

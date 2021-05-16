@@ -26,6 +26,13 @@ namespace Show4AllV3.Controllers
         {
             return View(new IdentityRole());
         }
+
+        [Authorize(Policy = "rolecreation")]
+        public IActionResult AdminView()
+        {
+            return View();
+        }
+
         [HttpPost]
         [Authorize(Policy = "rolecreation")]
         public async Task<IActionResult> Create(IdentityRole role)
