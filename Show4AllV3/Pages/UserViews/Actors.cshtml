@@ -1,8 +1,9 @@
 ﻿@page
-@model Show4AllV3.Pages.UserViews.IndexModel
+@model Show4AllV3.Pages.UserViews.ActorModel
 
 @{
     ViewData["Title"] = "Actors";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h1>Actors</h1>
@@ -27,7 +28,7 @@
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Image)
+                <img src="@Html.DisplayFor(modelItem => item.Image)" />
             </td>
 
         </tr>

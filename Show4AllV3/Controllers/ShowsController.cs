@@ -29,6 +29,18 @@ namespace Show4AllV3.Controllers
             return View(await show4AllV3Context.ToListAsync());
         }
 
+        // GET: ShowSearchForm
+        public async Task<IActionResult> ShowSearchForm()
+        {
+            return View();
+        }
+
+        // POST: ShowSearchResults
+        public async Task<IActionResult> ShowSearchResults(String SearchShow)
+        {
+
+            return View("Index", await _context.Shows.Where(j => j.Title.Contains(SearchShow)).ToListAsync());
+        }
 
 
         // GET: Shows/Details/5
