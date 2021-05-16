@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -20,14 +21,13 @@ namespace Show4AllV3.Controllers
         }
 
 
-
-
         // GET: Shows
         public async Task<IActionResult> Index()
         {
             var show4AllV3Context = _context.Shows.Include(s => s.ActorList).Include(s => s.Episode).Include(s => s.Season).Include(s => s.Genre);
             return View(await show4AllV3Context.ToListAsync());
         }
+
 
         // GET: ShowSearchForm
         public async Task<IActionResult> ShowSearchForm()
@@ -65,7 +65,7 @@ namespace Show4AllV3.Controllers
             return View(shows);
         }
 
-        // GET: Shows/Create
+        [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
 
@@ -94,7 +94,7 @@ namespace Show4AllV3.Controllers
             return View(shows);
         }
 
-        // GET: Shows/Edit/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -151,7 +151,7 @@ namespace Show4AllV3.Controllers
             return View(shows);
         }
 
-        // GET: Shows/Delete/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -173,7 +173,7 @@ namespace Show4AllV3.Controllers
             return View(shows);
         }
 
-        // POST: Shows/Delete/5
+        [Authorize(Roles = "Admin")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
