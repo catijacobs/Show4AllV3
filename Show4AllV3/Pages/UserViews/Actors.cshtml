@@ -1,0 +1,36 @@
+﻿@page
+@model Show4AllV3.Pages.UserViews.IndexModel
+
+@{
+    ViewData["Title"] = "Actors";
+}
+
+<h1>Actors</h1>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ActorList[0].Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ActorList[0].Image)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.ActorList) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Image)
+            </td>
+
+        </tr>
+}
+    </tbody>
+</table>

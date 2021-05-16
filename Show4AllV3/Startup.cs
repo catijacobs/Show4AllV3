@@ -61,6 +61,8 @@ namespace Show4AllV3
                  policy.RequireRole("Admin")
                  );
              });
+
+            
            
         } 
 
