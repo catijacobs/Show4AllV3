@@ -42,25 +42,25 @@ namespace Show4AllV3.Models
         [ForeignKey("GenreId")]
         public virtual Genre Genre { get; set; }
 
-        [RegularExpression(@"^[A-Z]+[a-zA-Z''-'\s]*$")]
+        
         [StringLength(5)]
         public string Rating { get; set; }
 
 
         public int RateCount
         {
-            get { return Ratings.Count; }
+           get { return Ratings.Count; }
         }
 
-        public int RateTotal
-        {
+       public int RateTotal
+       {
             get
-            {
-                return (Ratings.Sum(m => m.Rate));
+           {
+               return (Ratings.Sum(m => m.Rate));
             }
-        }
+       }
 
-        public virtual ICollection<StarRating> Ratings { get; set; }
+       public virtual ICollection<StarRating> Ratings { get; set; }
 
         public Shows()
         {
