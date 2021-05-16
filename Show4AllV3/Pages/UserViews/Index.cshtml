@@ -39,6 +39,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.Shows[0].IsAvailable)
             </th>
+            
             <th></th>
         </tr>
     </thead>
@@ -70,11 +71,10 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Genre.Name)
             </td>
-
             <td>
                 @Html.DisplayFor(modelItem => item.IsAvailable)
-
             </td>
+           
         </tr>
 }
     </tbody>

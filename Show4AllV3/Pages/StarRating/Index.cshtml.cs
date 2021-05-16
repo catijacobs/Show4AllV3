@@ -7,23 +7,26 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Show4AllV3.Data;
 using Show4AllV3.Models;
+using Show4AllV3.Repositories;
 
 namespace Show4AllV3.Pages.StarRating
 {
     public class IndexModel : PageModel
     {
-        private readonly ApplicationDbContext _context;
+        private readonly StarRatingRepository _starratingrepository;
 
-        public IndexModel(ApplicationDbContext context)
+        public IndexModel(StarRatingRepository starratingrepository)
         {
-            _context = context;
+
+            _starratingrepository = starratingrepository;
         }
+
 
         public IList<StarRating1> StarRating1 { get;set; }
 
-        public async Task OnGetAsync()
+        public IActionResult OnGet()
         {
-            StarRating1 = await _context.StarRating1.ToListAsync();
+            return Page();
         }
     }
 }

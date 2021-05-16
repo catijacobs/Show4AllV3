@@ -1,4 +1,6 @@
-﻿using Show4AllV3.Data;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Show4AllV3.Data;
 using Show4AllV3.Models;
 using System;
 using System.Collections.Generic;
@@ -10,6 +12,10 @@ namespace Show4AllV3.Repositories
     public class StarRatingRepository
     {
         private readonly ApplicationDbContext _ctx;
+
+        public object StarRating1 { get; internal set; }
+        public object Shows { get; internal set; }
+
         public StarRatingRepository(ApplicationDbContext ctx)
         {
             _ctx = ctx;
@@ -51,6 +57,9 @@ namespace Show4AllV3.Repositories
 
             return true;
         }
+
+     
+
 
     }
 }
