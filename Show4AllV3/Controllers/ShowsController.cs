@@ -51,10 +51,10 @@ namespace Show4AllV3.Controllers
         // GET: Shows/Create
         public IActionResult Create()
         {
-            ViewData["ActorListId"] = new SelectList(_context.Set<ActorList>(), "Name", "Name");
-            ViewData["EpisodeId"] = new SelectList(_context.Set<Episode>(), "Name", "Name");
-            ViewData["SeasonId"] = new SelectList(_context.Set<Season>(), "Name", "Name");
-            ViewData["GenreId"] = new SelectList(_context.Set<Genre>(), "Name", "Name");
+            ViewData["ActorListId"] = new SelectList(_context.Set<ActorList>(), "Id", "Id");
+            ViewData["EpisodeId"] = new SelectList(_context.Set<Episode>(), "Id", "Id");
+            ViewData["SeasonId"] = new SelectList(_context.Set<Season>(), "Id", "Id");
+            ViewData["GenreId"] = new SelectList(_context.Set<Genre>(), "Id", "Id");
             return View();
         }
 
@@ -63,7 +63,7 @@ namespace Show4AllV3.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Title,Year,Image,Price,IsAvailable,ActorListId,SeasonId,EpisodeId,Rating")] Shows shows)
+        public async Task<IActionResult> Create([Bind("Id,Title,Year,Image,Price,IsAvailable,ActorListId,SeasonId,EpisodeId,GenreId")] Shows shows)
         {
             if (ModelState.IsValid)
             {
