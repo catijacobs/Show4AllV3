@@ -1,4 +1,5 @@
-﻿@model Show4AllV3.Models.StarRating1
+﻿@page
+@model Show4AllV3.Pages.StarRating.CreateModel
 
 @{
     ViewData["Title"] = "Create";
@@ -10,12 +11,12 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
+                <label asp-for="StarRating1.Name" class="control-label"></label>
+                <input asp-for="StarRating1.Name" class="form-control" />
+                <span asp-validation-for="StarRating1.Name" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
@@ -25,7 +26,7 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-page="Index">Back to List</a>
 </div>
 
 @section Scripts {

@@ -58,6 +58,9 @@ namespace Show4AllV3
 
              });
 
+            services.AddDbContext<Show4AllV3Context>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("Show4AllV3Context")));
+
 
 
         } 
