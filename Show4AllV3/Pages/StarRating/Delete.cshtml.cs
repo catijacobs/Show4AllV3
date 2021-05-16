@@ -7,20 +7,22 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Show4AllV3.Data;
 using Show4AllV3.Models;
+using Show4AllV3.Repositories;
 
 namespace Show4AllV3.Pages.StarRating
 {
     public class DeleteModel : PageModel
     {
-        private readonly ApplicationDbContext _context;
+        private readonly StarRatingRepository _starratingrepository;
 
-        public DeleteModel(ApplicationDbContext context)
+        public DeleteModel(StarRatingRepository starratingrepository)
         {
-            _context = context;
+            _starratingrepository = starratingrepository;
         }
 
         [BindProperty]
         public StarRating1 StarRating1 { get; set; }
+        public StarRatingRepository Starratingrepository { get; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -29,7 +31,7 @@ namespace Show4AllV3.Pages.StarRating
                 return NotFound();
             }
 
-            StarRating1 = await _context.StarRating1.FirstOrDefaultAsync(m => m.Id == id);
+            StarRating1 = await _starratingrepository.GetAsync(id.Value);
 
             if (StarRating1 == null)
             {
@@ -45,13 +47,8 @@ namespace Show4AllV3.Pages.StarRating
                 return NotFound();
             }
 
-            StarRating1 = await _context.StarRating1.FindAsync(id);
 
-            if (StarRating1 != null)
-            {
-                _context.StarRating1.Remove(StarRating1);
-                await _context.SaveChangesAsync();
-            }
+            _ = await _starratingrepository.DeleteAsync(id.Value);
 
             return RedirectToPage("./Index");
         }

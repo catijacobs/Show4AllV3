@@ -1,0 +1,81 @@
+﻿@page
+@model Show4AllV3.Pages.UserViews.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>The newest shows</h1>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Shows[0].Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Shows[0].Year)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Shows[0].Image)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Shows[0].Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Shows[0].ActorList)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Shows[0].Season)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Shows[0].Episode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Shows[0].Genre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Shows[0].IsAvailable)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Shows) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Year)
+            </td>
+            <td>
+                <img src="@Html.DisplayFor(modelItem => item.Image)" />
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.ActorList.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Season.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Episode.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Genre.Name)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.IsAvailable)
+
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -60,15 +60,8 @@ namespace Show4AllV3
                  options.AddPolicy("rolecreation", policy =>
                  policy.RequireRole("Admin")
                  );
-
-
-
              });
-
-
-
-
-
+           
         } 
 
 

@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using Show4AllV3.Data;
 using Show4AllV3.Models;
 using System;
 using System.Collections.Generic;
@@ -13,6 +15,7 @@ namespace Show4AllV3.Controllers
     [AllowAnonymous]
     public class HomeController : Controller
     {
+
         private readonly ILogger<HomeController> _logger;
 
         public HomeController(ILogger<HomeController> logger)
@@ -34,6 +37,8 @@ namespace Show4AllV3.Controllers
         {
             return View();
         }
+
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

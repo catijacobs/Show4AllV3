@@ -29,7 +29,7 @@ namespace Show4AllV3.Pages.StarRating
         [BindProperty]
         public StarRating1 StarRating1 { get; set; }
 
-        // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
+
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)

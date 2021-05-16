@@ -15,6 +15,11 @@ namespace Show4AllV3.Repositories
             _ctx = ctx;
         }
 
+        public async Task<StarRating1> GetAsync(int id)
+        {
+            return await _ctx.StarRating1.FindAsync(id);
+        }
+
         public StarRating1 Add(string name)
         {
             var starrating1 = new StarRating1 { Name = name };
@@ -33,5 +38,19 @@ namespace Show4AllV3.Repositories
 
             return rating;
         }
+
+        public async Task<bool> DeleteAsync(int id)
+        {
+            var starrating1 = _ctx.StarRating1.FirstOrDefault(u => u.Id == id);
+
+            if (starrating1 == null)
+                return false;
+
+            _ctx.Remove(starrating1);
+            await _ctx.SaveChangesAsync();
+
+            return true;
+        }
+
     }
 }

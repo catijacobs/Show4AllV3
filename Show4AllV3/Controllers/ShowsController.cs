@@ -19,12 +19,17 @@ namespace Show4AllV3.Controllers
             _context = context;
         }
 
+
+
+
         // GET: Shows
         public async Task<IActionResult> Index()
         {
             var show4AllV3Context = _context.Shows.Include(s => s.ActorList).Include(s => s.Episode).Include(s => s.Season).Include(s => s.Genre);
             return View(await show4AllV3Context.ToListAsync());
         }
+
+
 
         // GET: Shows/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -51,6 +56,7 @@ namespace Show4AllV3.Controllers
         // GET: Shows/Create
         public IActionResult Create()
         {
+
             ViewData["ActorListId"] = new SelectList(_context.Set<ActorList>(), "Id", "Name");
             ViewData["EpisodeId"] = new SelectList(_context.Set<Episode>(), "Id", "Name");
             ViewData["SeasonId"] = new SelectList(_context.Set<Season>(), "Id", "Name");
