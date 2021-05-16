@@ -40,12 +40,25 @@ namespace Show4AllV3
 
 
 
-            services.AddAuthorization(options =>
-            {
-                options.FallbackPolicy = new AuthorizationPolicyBuilder()
-                    .RequireAuthenticatedUser()
-                    .Build();
-            });
+             services.AddAuthorization(options =>
+             {
+                 options.FallbackPolicy = new AuthorizationPolicyBuilder()
+                     .RequireAuthenticatedUser()
+                      .Build();
+
+                 options.AddPolicy("EmailID", policy =>
+                policy.RequireClaim("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"
+                ));
+
+                 options.AddPolicy("rolecreation", policy =>
+                 policy.RequireRole("Admin")
+                 );
+
+
+
+             });
+
+
 
         } 
 
