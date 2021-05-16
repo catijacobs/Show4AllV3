@@ -12,6 +12,7 @@ namespace Show4AllV3.Areas.Identity.Pages.Account.Manage
         public static string Index => "Index";
 
         public static string Email => "Email";
+    
 
         public static string ChangePassword => "ChangePassword";
 
