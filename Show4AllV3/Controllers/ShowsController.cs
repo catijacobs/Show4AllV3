@@ -51,10 +51,10 @@ namespace Show4AllV3.Controllers
         // GET: Shows/Create
         public IActionResult Create()
         {
-            ViewData["ActorListId"] = new SelectList(_context.Set<ActorList>(), "Name", "Name");
-            ViewData["EpisodeId"] = new SelectList(_context.Set<Episode>(), "Name", "Name");
-            ViewData["SeasonId"] = new SelectList(_context.Set<Season>(), "Name", "Name");
-            ViewData["GenreId"] = new SelectList(_context.Set<Genre>(), "Name", "Name");
+            ViewData["ActorListId"] = new SelectList(_context.Set<ActorList>(), "Id", "Name");
+            ViewData["EpisodeId"] = new SelectList(_context.Set<Episode>(), "Id", "Name");
+            ViewData["SeasonId"] = new SelectList(_context.Set<Season>(), "Id", "Name");
+            ViewData["GenreId"] = new SelectList(_context.Set<Genre>(), "Id", "Name");
             return View();
         }
 
@@ -69,10 +69,10 @@ namespace Show4AllV3.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ActorListId"] = new SelectList(_context.Set<ActorList>(), "Id", "Id", shows.ActorListId);
-            ViewData["EpisodeId"] = new SelectList(_context.Set<Episode>(), "Id", "Id", shows.EpisodeId);
-            ViewData["SeasonId"] = new SelectList(_context.Set<Season>(), "Id", "Id", shows.SeasonId);
-            ViewData["GenreId"] = new SelectList(_context.Set<Genre>(), "Id", "Id", shows.GenreId);
+            ViewData["ActorListId"] = new SelectList(_context.Set<ActorList>(), "Id", "Name", shows.ActorListId);
+            ViewData["EpisodeId"] = new SelectList(_context.Set<Episode>(), "Id", "Name", shows.EpisodeId);
+            ViewData["SeasonId"] = new SelectList(_context.Set<Season>(), "Id", "Name", shows.SeasonId);
+            ViewData["GenreId"] = new SelectList(_context.Set<Genre>(), "Id", "Name", shows.GenreId);
             return View(shows);
         }
 
@@ -89,10 +89,10 @@ namespace Show4AllV3.Controllers
             {
                 return NotFound();
             }
-            ViewData["ActorListId"] = new SelectList(_context.Set<ActorList>(), "Name", "Name", shows.ActorListId);
-            ViewData["EpisodeId"] = new SelectList(_context.Set<Episode>(), "Name", "Name", shows.EpisodeId);
-            ViewData["SeasonId"] = new SelectList(_context.Set<Season>(), "Name", "Name", shows.SeasonId);
-            ViewData["GenreId"] = new SelectList(_context.Set<Genre>(), "Name", "Name", shows.GenreId);
+            ViewData["ActorListId"] = new SelectList(_context.Set<ActorList>(), "Id", "Name", shows.ActorListId);
+            ViewData["EpisodeId"] = new SelectList(_context.Set<Episode>(), "Id", "Name", shows.EpisodeId);
+            ViewData["SeasonId"] = new SelectList(_context.Set<Season>(), "Id", "Name", shows.SeasonId);
+            ViewData["GenreId"] = new SelectList(_context.Set<Genre>(), "Id", "Name", shows.GenreId);
             return View(shows);
         }
 
@@ -126,10 +126,10 @@ namespace Show4AllV3.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ActorListId"] = new SelectList(_context.Set<ActorList>(), "Id", "Id", shows.ActorListId);
-            ViewData["EpisodeId"] = new SelectList(_context.Set<Episode>(), "Id", "Id", shows.EpisodeId);
-            ViewData["SeasonId"] = new SelectList(_context.Set<Season>(), "Id", "Id", shows.SeasonId);
-            ViewData["GenreId"] = new SelectList(_context.Set<Genre>(), "Id", "Id", shows.GenreId);
+            ViewData["ActorListId"] = new SelectList(_context.Set<ActorList>(), "Id", "Name", shows.ActorListId);
+            ViewData["EpisodeId"] = new SelectList(_context.Set<Episode>(), "Id", "Name", shows.EpisodeId);
+            ViewData["SeasonId"] = new SelectList(_context.Set<Season>(), "Id", "Name", shows.SeasonId);
+            ViewData["GenreId"] = new SelectList(_context.Set<Genre>(), "Id", "Name", shows.GenreId);
             return View(shows);
         }
 

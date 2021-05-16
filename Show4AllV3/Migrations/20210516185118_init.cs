@@ -75,6 +75,19 @@ namespace Show4AllV3.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Genre",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Genre", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Season",
                 columns: table => new
                 {
@@ -85,6 +98,19 @@ namespace Show4AllV3.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Season", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "StarRating1",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_StarRating1", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -207,7 +233,8 @@ namespace Show4AllV3.Migrations
                     ActorListId = table.Column<int>(type: "int", nullable: false),
                     SeasonId = table.Column<int>(type: "int", nullable: false),
                     EpisodeId = table.Column<int>(type: "int", nullable: false),
-                    Rating = table.Column<string>(type: "nvarchar(5)", maxLength: 5, nullable: true)
+                    GenreId = table.Column<int>(type: "int", nullable: false),
+                    StarRating1Id = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -225,32 +252,23 @@ namespace Show4AllV3.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
+                        name: "FK_Shows_Genre_GenreId",
+                        column: x => x.GenreId,
+                        principalTable: "Genre",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
                         name: "FK_Shows_Season_SeasonId",
                         column: x => x.SeasonId,
                         principalTable: "Season",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "StarRating",
-                columns: table => new
-                {
-                    RateId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Rate = table.Column<int>(type: "int", nullable: false),
-                    Location = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ShowsId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_StarRating", x => x.RateId);
                     table.ForeignKey(
-                        name: "FK_StarRating_Shows_ShowsId",
-                        column: x => x.ShowsId,
-                        principalTable: "Shows",
+                        name: "FK_Shows_StarRating1_StarRating1Id",
+                        column: x => x.StarRating1Id,
+                        principalTable: "StarRating1",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
@@ -303,14 +321,19 @@ namespace Show4AllV3.Migrations
                 column: "EpisodeId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Shows_GenreId",
+                table: "Shows",
+                column: "GenreId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Shows_SeasonId",
                 table: "Shows",
                 column: "SeasonId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_StarRating_ShowsId",
-                table: "StarRating",
-                column: "ShowsId");
+                name: "IX_Shows_StarRating1Id",
+                table: "Shows",
+                column: "StarRating1Id");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -331,7 +354,7 @@ namespace Show4AllV3.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "StarRating");
+                name: "Shows");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
@@ -340,16 +363,19 @@ namespace Show4AllV3.Migrations
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
-                name: "Shows");
-
-            migrationBuilder.DropTable(
                 name: "ActorList");
 
             migrationBuilder.DropTable(
                 name: "Episode");
 
             migrationBuilder.DropTable(
+                name: "Genre");
+
+            migrationBuilder.DropTable(
                 name: "Season");
+
+            migrationBuilder.DropTable(
+                name: "StarRating1");
         }
     }
 }

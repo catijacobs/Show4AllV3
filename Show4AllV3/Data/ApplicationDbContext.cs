@@ -25,6 +25,7 @@ namespace Show4AllV3.Data
         public DbSet<Show4AllV3.Models.Season> Season { get; set; }
         public DbSet<Show4AllV3.Models.Episode> Episode { get; set; }
         public DbSet<Show4AllV3.Models.Genre> Genre { get; set; }
+        public DbSet<Show4AllV3.Models.StarRating1> StarRating1 { get; set; }
     }
 
 

@@ -10,8 +10,8 @@ using Show4AllV3.Data;
 namespace Show4AllV3.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210516165412_updateImg")]
-    partial class updateImg
+    [Migration("20210516185118_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -311,6 +311,9 @@ namespace Show4AllV3.Migrations
                     b.Property<int>("SeasonId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("StarRating1Id")
+                        .HasColumnType("int");
+
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
 
@@ -327,7 +330,24 @@ namespace Show4AllV3.Migrations
 
                     b.HasIndex("SeasonId");
 
+                    b.HasIndex("StarRating1Id");
+
                     b.ToTable("Shows");
+                });
+
+            modelBuilder.Entity("Show4AllV3.Models.StarRating1", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("StarRating1");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -407,6 +427,10 @@ namespace Show4AllV3.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Show4AllV3.Models.StarRating1", null)
+                        .WithMany("Shows")
+                        .HasForeignKey("StarRating1Id");
+
                     b.Navigation("ActorList");
 
                     b.Navigation("Episode");
@@ -414,6 +438,11 @@ namespace Show4AllV3.Migrations
                     b.Navigation("Genre");
 
                     b.Navigation("Season");
+                });
+
+            modelBuilder.Entity("Show4AllV3.Models.StarRating1", b =>
+                {
+                    b.Navigation("Shows");
                 });
 #pragma warning restore 612, 618
         }
