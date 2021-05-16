@@ -42,25 +42,6 @@ namespace Show4AllV3.Models
         [ForeignKey("GenreId")]
         public virtual Genre Genre { get; set; }
 
-        
-        [StringLength(5)]
-        public string Rating { get; set; }
-
-
-        public int RateCount
-        {
-           get { return Ratings.Count; }
-        }
-
-       public int RateTotal
-       {
-            get
-           {
-               return (Ratings.Sum(m => m.Rate));
-            }
-       }
-
-       public virtual ICollection<StarRating> Ratings { get; set; }
 
         public Shows()
         {
