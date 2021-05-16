@@ -31,9 +31,9 @@ namespace Show4AllV3
         {
 
 
-       // services.AddDbContext<ApplicationDbContext>(options =>
-       // options.UseSqlServer(
-       // Configuration.GetConnectionString("DefaultConnection")));
+       services.AddDbContext<ApplicationDbContext>(options =>
+       options.UseSqlServer(
+       Configuration.GetConnectionString("DefaultConnection")));
 
 
         services.AddDatabaseDeveloperPageExceptionFilter();
