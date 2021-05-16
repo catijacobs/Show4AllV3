@@ -20,11 +20,11 @@ namespace Show4AllV3.Data
             base.OnModelCreating(builder);
         }
 
-        public DbSet<Show4AllV3.Models.TvShow> TvShow { get; set; }
+        public DbSet<Show4AllV3.Models.Shows> Shows { get; set; }
         public DbSet<Show4AllV3.Models.ActorList> ActorList { get; set; }
         public DbSet<Show4AllV3.Models.Season> Season { get; set; }
         public DbSet<Show4AllV3.Models.Episode> Episode { get; set; }
-
+        public DbSet<Show4AllV3.Models.StarRating> StarRating { get; set; }
     }
 
 

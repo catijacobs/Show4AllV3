@@ -8,27 +8,24 @@ using Microsoft.EntityFrameworkCore;
 using Show4AllV3.Data;
 using Show4AllV3.Models;
 
-
-
 namespace Show4AllV3.Controllers
 {
-    public class TvShowsController : Controller
+    public class ActorListsController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public TvShowsController(ApplicationDbContext context)
+        public ActorListsController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: TvShows
+        // GET: ActorLists
         public async Task<IActionResult> Index()
         {
-            return View(await _context.TvShow.ToListAsync());
+            return View(await _context.ActorList.ToListAsync());
         }
-   
 
-        // GET: TvShows/Details/5
+        // GET: ActorLists/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -36,50 +33,39 @@ namespace Show4AllV3.Controllers
                 return NotFound();
             }
 
-            var tvShow = await _context.TvShow
+            var actorList = await _context.ActorList
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (tvShow == null)
+            if (actorList == null)
             {
                 return NotFound();
             }
 
-            return View(tvShow);
+            return View(actorList);
         }
 
-        // GET: TvShows/Create
+        // GET: ActorLists/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        public async Task<IActionResult> TvShowInventory()
-        {
-            return View(await _context.TvShow.ToListAsync());
-        }
-
-        public async Task<IActionResult> ShowSearchForm()
-        {
-            return View(await _context.TvShow.ToListAsync());
-        }
-
-
-        // POST: TvShows/Create
+        // POST: ActorLists/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Title,Year,Category, Image")] TvShow tvShow)
+        public async Task<IActionResult> Create([Bind("Id,Name,Image")] ActorList actorList)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(tvShow);
+                _context.Add(actorList);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(tvShow);
+            return View(actorList);
         }
 
-        // GET: TvShows/Edit/5
+        // GET: ActorLists/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -87,22 +73,22 @@ namespace Show4AllV3.Controllers
                 return NotFound();
             }
 
-            var tvShow = await _context.TvShow.FindAsync(id);
-            if (tvShow == null)
+            var actorList = await _context.ActorList.FindAsync(id);
+            if (actorList == null)
             {
                 return NotFound();
             }
-            return View(tvShow);
+            return View(actorList);
         }
 
-        // POST: TvShows/Edit/5
+        // POST: ActorLists/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Year,Category, Image")] TvShow tvShow)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Image")] ActorList actorList)
         {
-            if (id != tvShow.Id)
+            if (id != actorList.Id)
             {
                 return NotFound();
             }
@@ -111,12 +97,12 @@ namespace Show4AllV3.Controllers
             {
                 try
                 {
-                    _context.Update(tvShow);
+                    _context.Update(actorList);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!TvShowExists(tvShow.Id))
+                    if (!ActorListExists(actorList.Id))
                     {
                         return NotFound();
                     }
@@ -127,10 +113,10 @@ namespace Show4AllV3.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(tvShow);
+            return View(actorList);
         }
 
-        // GET: TvShows/Delete/5
+        // GET: ActorLists/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -138,32 +124,30 @@ namespace Show4AllV3.Controllers
                 return NotFound();
             }
 
-            var tvShow = await _context.TvShow
+            var actorList = await _context.ActorList
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (tvShow == null)
+            if (actorList == null)
             {
                 return NotFound();
             }
 
-            return View(tvShow);
+            return View(actorList);
         }
 
-        // POST: TvShows/Delete/5
+        // POST: ActorLists/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var tvShow = await _context.TvShow.FindAsync(id);
-            _context.TvShow.Remove(tvShow);
+            var actorList = await _context.ActorList.FindAsync(id);
+            _context.ActorList.Remove(actorList);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool TvShowExists(int id)
+        private bool ActorListExists(int id)
         {
-            return _context.TvShow.Any(e => e.Id == id);
+            return _context.ActorList.Any(e => e.Id == id);
         }
     }
 }
-
-

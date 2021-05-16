@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Show4AllV3.Migrations
 {
-    public partial class init1 : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -85,22 +85,6 @@ namespace Show4AllV3.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Season", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "TvShow",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Year = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Category = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Image = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_TvShow", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -209,6 +193,66 @@ namespace Show4AllV3.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Shows",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Year = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Image = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    IsAvailable = table.Column<bool>(type: "bit", nullable: false),
+                    ActorListId = table.Column<int>(type: "int", nullable: false),
+                    SeasonId = table.Column<int>(type: "int", nullable: false),
+                    EpisodeId = table.Column<int>(type: "int", nullable: false),
+                    Rating = table.Column<string>(type: "nvarchar(5)", maxLength: 5, nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Shows", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Shows_ActorList_ActorListId",
+                        column: x => x.ActorListId,
+                        principalTable: "ActorList",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Shows_Episode_EpisodeId",
+                        column: x => x.EpisodeId,
+                        principalTable: "Episode",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Shows_Season_SeasonId",
+                        column: x => x.SeasonId,
+                        principalTable: "Season",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "StarRating",
+                columns: table => new
+                {
+                    RateId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Rate = table.Column<int>(type: "int", nullable: false),
+                    Location = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ShowsId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_StarRating", x => x.RateId);
+                    table.ForeignKey(
+                        name: "FK_StarRating_Shows_ShowsId",
+                        column: x => x.ShowsId,
+                        principalTable: "Shows",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -247,13 +291,30 @@ namespace Show4AllV3.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Shows_ActorListId",
+                table: "Shows",
+                column: "ActorListId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Shows_EpisodeId",
+                table: "Shows",
+                column: "EpisodeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Shows_SeasonId",
+                table: "Shows",
+                column: "SeasonId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_StarRating_ShowsId",
+                table: "StarRating",
+                column: "ShowsId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "ActorList");
-
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
 
@@ -270,19 +331,25 @@ namespace Show4AllV3.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Episode");
-
-            migrationBuilder.DropTable(
-                name: "Season");
-
-            migrationBuilder.DropTable(
-                name: "TvShow");
+                name: "StarRating");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Shows");
+
+            migrationBuilder.DropTable(
+                name: "ActorList");
+
+            migrationBuilder.DropTable(
+                name: "Episode");
+
+            migrationBuilder.DropTable(
+                name: "Season");
         }
     }
 }

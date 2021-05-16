@@ -266,18 +266,34 @@ namespace Show4AllV3.Migrations
                     b.ToTable("Season");
                 });
 
-            modelBuilder.Entity("Show4AllV3.Models.TvShow", b =>
+            modelBuilder.Entity("Show4AllV3.Models.Shows", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Category")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("ActorListId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("EpisodeId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Image")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsAvailable")
+                        .HasColumnType("bit");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("Rating")
+                        .HasMaxLength(5)
+                        .HasColumnType("nvarchar(5)");
+
+                    b.Property<int>("SeasonId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
@@ -287,7 +303,36 @@ namespace Show4AllV3.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("TvShow");
+                    b.HasIndex("ActorListId");
+
+                    b.HasIndex("EpisodeId");
+
+                    b.HasIndex("SeasonId");
+
+                    b.ToTable("Shows");
+                });
+
+            modelBuilder.Entity("Show4AllV3.Models.StarRating", b =>
+                {
+                    b.Property<int>("RateId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Location")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Rate")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ShowsId")
+                        .HasColumnType("int");
+
+                    b.HasKey("RateId");
+
+                    b.HasIndex("ShowsId");
+
+                    b.ToTable("StarRating");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -339,6 +384,49 @@ namespace Show4AllV3.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Show4AllV3.Models.Shows", b =>
+                {
+                    b.HasOne("Show4AllV3.Models.ActorList", "ActorList")
+                        .WithMany()
+                        .HasForeignKey("ActorListId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Show4AllV3.Models.Episode", "Episode")
+                        .WithMany()
+                        .HasForeignKey("EpisodeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Show4AllV3.Models.Season", "Season")
+                        .WithMany()
+                        .HasForeignKey("SeasonId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ActorList");
+
+                    b.Navigation("Episode");
+
+                    b.Navigation("Season");
+                });
+
+            modelBuilder.Entity("Show4AllV3.Models.StarRating", b =>
+                {
+                    b.HasOne("Show4AllV3.Models.Shows", "Shows")
+                        .WithMany("Ratings")
+                        .HasForeignKey("ShowsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Shows");
+                });
+
+            modelBuilder.Entity("Show4AllV3.Models.Shows", b =>
+                {
+                    b.Navigation("Ratings");
                 });
 #pragma warning restore 612, 618
         }
