@@ -32,6 +32,7 @@ namespace Show4AllV3.Controllers
         // GET: ShowSearchForm
         public async Task<IActionResult> ShowSearchForm()
         {
+            ViewData["ActorListId"] = new SelectList(_context.Set<ActorList>(), "Id", "Name");
             return View();
         }
 
@@ -40,6 +41,13 @@ namespace Show4AllV3.Controllers
         {
 
             return View("Index", await _context.Shows.Where(j => j.Title.Contains(SearchShow)).ToListAsync());
+        }
+
+
+        // POST: ShowSearchResultsActor
+        public async Task<IActionResult> ShowSearchFormActor(String SearchActor)
+        {
+            return View("Index", await _context.Shows.Where(j => j.Title.Contains(SearchActor)).ToListAsync());
         }
 
 
